@@ -8,7 +8,9 @@ class Particle{
         }
         this.body = Bodies.circle(x,y,r,this.options);
         this.r = r; //radius
-        this.r = r; //radius
+
+        this.pos = this.body.position;
+        // console.log(this.pos);
         
         World.add(world,this.body);
         }
@@ -22,6 +24,14 @@ class Particle{
         translate(pos.x,pos.y);
         ellipse(0,0, this.r*2);
         pop();
+    }
+    isOffScreen(){
+        var x = this.pos.x;
+        
+        if( x < -10 || x >= width+10){
+            World.remove(world,this.body);
+            return true;
+        }
     }
 
 }

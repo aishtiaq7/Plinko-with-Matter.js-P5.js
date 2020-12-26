@@ -13,7 +13,7 @@ var particles =[];
 
 var plinkos = [];
 var col = 11;
-var row = 12;
+var row = 15;
 var plinkoRadius =5
 
 var boundaries = [];
@@ -26,7 +26,7 @@ function setup() {
  
     createPlinkos();
 
-    world.gravity.y= 2;
+    world.gravity.y= 0.7;
                             //   x , y , w , h 
     boundaries.push(new Boundary(width/2, height +50, width ,100));
 
@@ -66,9 +66,26 @@ function draw() {
 
 
 
-    particles.forEach(particle =>{
-        particle.show();
-    });
+    // particles.forEach( (particle,index) =>{
+    //     particle.show();
+    //     if( particle.isOffScreen){
+    //         console.log('removing at index' + index)
+    //         particles.splice(index,1);
+    //         index--;
+    //     }
+    // });
+
+    for( var i =0 ; i< particles.length; i++){
+        particles[i].show();
+
+        if(particles[i].isOffScreen()){
+            console.log(`removing a particle.`);
+            console.log(`particles.length:${particles.length}`);
+            particles.splice(i,1);
+            i--;
+        }
+    }
+
     plinkos.forEach(plinko =>{
         plinko.show();
     });
