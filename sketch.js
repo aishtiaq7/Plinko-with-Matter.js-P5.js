@@ -12,8 +12,8 @@ var world;
 var particles =[];
 
 var plinkos = [];
-var col = 10;
-var row = 15;
+var col = 11;
+var row = 12;
 var plinkoRadius =5
 
 function setup() {
