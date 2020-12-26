@@ -16,6 +16,8 @@ var col = 11;
 var row = 12;
 var plinkoRadius =5
 
+var boundaries = [];
+
 function setup() {
     createCanvas(800, 600);
 
@@ -23,6 +25,10 @@ function setup() {
     world = engine.world;
  
     createPlinkos();
+
+    world.gravity.y= 2;
+                            //   x , y , w , h 
+    boundaries.push(new Boundary(width/2, height +50, width ,100));
 
 }
 
@@ -53,7 +59,6 @@ function draw() {
     background(0, 0, 0);
     Engine.update(engine); 
 
-    // console.log(plinkos.length);
 
     if( frameCount % 20 == 0){
         createNewParticle();
@@ -66,7 +71,9 @@ function draw() {
     });
     plinkos.forEach(plinko =>{
         plinko.show();
-        // console.log(plinko);
+    });
+    boundaries.forEach(boundary =>{
+        boundary.show();
     })
 
 }
