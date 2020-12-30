@@ -11,7 +11,8 @@ View result here:
 https://aishtiaq7.github.io/Plinko-with-Matter.js-P5.js/
 
 
-![Alt Text]('images/Bell-Curve-Plinko-SC.PNG')
+SCREENSHOT: 
+<img src="./images/Bell-Curve-Plinko-SC.PNG" alt="My cool logo"/>
 
 Special thanks to @CodingTrain for the guide to accomplish this:
 https://github.com/CodingTrain
