@@ -6,6 +6,10 @@ var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
     Bodies = Matter.Bodies;
+    Events = Matter.Events;
+
+
+
 
 var engine; 
 var world; 
@@ -19,6 +23,11 @@ var plinkoRadius =16
 var spacing = 0;
 
 var boundaries = [];
+
+function preload(){
+
+    // var ding = loadSound('ding.mp3');
+}
 
 function setup() {
     createCanvas(800, 600);
@@ -35,7 +44,42 @@ function setup() {
 
     createBuckets();
 
+    Events.on(engine, 'collisionStart', pairsCollision);
+
 }
+
+function pairsCollision(event){
+
+    
+
+    // if( event.pairs[0].id){
+    //     var labelA = event.pairs[0].bodyA.label;
+    //     var labelB = event.pairs[0].bodyB.label
+    //     console.log(labelA, labelB);
+    // }
+
+
+    var pairs  = event.pairs;
+    for ( var i=0; i<pairs.length; i++){
+        var labelA = pairs[i].bodyA.label;
+        var labelB = pairs[i].bodyB.label;
+
+        if(labelA == 'particle' && labelB =='plinko'){
+            // ding.play();
+            console.log(labelA,labelB);
+        }
+        if(labelA == 'plinko' && labelB =='particle'){
+            // ding.play();
+            console.log(labelA,labelB);
+        }
+
+        // console.log(labelA, labelB);
+
+    }
+
+    // console.log(event);
+}
+
 
 function createBuckets(){
 

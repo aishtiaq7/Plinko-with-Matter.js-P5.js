@@ -4,10 +4,13 @@ class Particle{
         this.options = {
             friction : 0,
             restitution : 0.5,
+            desity: 1.00
             
         }
-        x += random(-1,1); // 50% change to go left or right
+        x += random(-3,3); // 50% change to go left or right
         this.body = Bodies.circle(x,y,r,this.options);
+        this.body.label = 'particle';
+
         this.r = r; //radius
 
         this.pos = this.body.position;

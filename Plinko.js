@@ -8,6 +8,8 @@ class Plinko{
             friction : 0,
         }
         this.body = Bodies.circle(x,y,r,this.options);
+        this.body.label = 'plinko';
+
         this.r = r; //radius
         this.r = r; //radius
         

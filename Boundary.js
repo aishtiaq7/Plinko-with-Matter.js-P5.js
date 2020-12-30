@@ -8,6 +8,7 @@ class Boundary{
             restitution : 0.5
         }
         this.body = Bodies.rectangle(x,y,w,h,this.options);
+        this.body.label = 'boundary';
         
         this.w = w;
         this.h = h;
