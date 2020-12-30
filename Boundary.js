@@ -4,6 +4,8 @@ class Boundary{
 
         this.options = {
             isStatic : true,
+            friction : 0,
+            restitution : 0.5
         }
         this.body = Bodies.rectangle(x,y,w,h,this.options);
         
@@ -20,6 +22,7 @@ class Boundary{
         push();
         var pos = this.body.position;
         translate(pos.x,pos.y);
+        rectMode(CENTER);
         rect(0,0, this.w,this.h);
         pop();
     }

@@ -6,6 +6,7 @@ class Particle{
             restitution : 0.5,
             
         }
+        x += random(-1,1); // 50% change to go left or right
         this.body = Bodies.circle(x,y,r,this.options);
         this.r = r; //radius
 

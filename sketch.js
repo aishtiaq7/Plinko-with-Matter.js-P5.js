@@ -13,8 +13,10 @@ var particles =[];
 
 var plinkos = [];
 var col = 11;
-var row = 15;
-var plinkoRadius =5
+var row = 5;
+var plinkoRadius =16
+
+var spacing = 0;
 
 var boundaries = [];
 
@@ -27,16 +29,33 @@ function setup() {
     createPlinkos();
 
     world.gravity.y= 0.7;
-                            //   x , y , w , h 
+
+    // bottom bounary            //   x , y , w , h 
     boundaries.push(new Boundary(width/2, height +50, width ,100));
+
+    createBuckets();
+
+}
+
+function createBuckets(){
+
+    for ( var i = 0; i < col; i++){
+        var x = i * spacing + spacing/2;
+        var w = 10; 
+        var h = 100;
+        var y = height - h/2;
+
+        var b = new Boundary (x,y,w,h);
+        boundaries.push(b);
+    }
 
 }
 
 function createPlinkos(){
+    spacing = width/col;
 
-    var spacing = width/col;
-    for ( var i = 0 ; i< row; i++){
-        for ( var j = 0 ; j <col; j++){
+    for ( var j = 0 ; j< row; j++){
+        for ( var i = 0 ; i <col; i++){
             var x = i * spacing;
             
             if( j % 2 ==0){
@@ -51,7 +70,7 @@ function createPlinkos(){
 
 function createNewParticle(){
 
-    var p = new Particle(315,30,10);
+    var p = new Particle(width/2,30,10);
     particles.push(p);
 }
 
@@ -60,20 +79,11 @@ function draw() {
     Engine.update(engine); 
 
 
-    if( frameCount % 20 == 0){
+    if( frameCount % 60 == 0){
         createNewParticle();
     }
 
 
-
-    // particles.forEach( (particle,index) =>{
-    //     particle.show();
-    //     if( particle.isOffScreen){
-    //         console.log('removing at index' + index)
-    //         particles.splice(index,1);
-    //         index--;
-    //     }
-    // });
 
     for( var i =0 ; i< particles.length; i++){
         particles[i].show();
