@@ -14,8 +14,6 @@ class Particle{
         this.r = r; //radius
 
         this.pos = this.body.position;
-        // console.log(this.pos);
-        
         World.add(world,this.body);
         }
 

@@ -1,15 +1,10 @@
 
-
-
 // module aliases
 var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
     Bodies = Matter.Bodies;
     Events = Matter.Events;
-
-
-
 
 var engine; 
 var world; 
@@ -26,6 +21,7 @@ var boundaries = [];
 
 function preload(){
 
+    //There was this problem with p5.js not supporting sound
     // var ding = loadSound('ding.mp3');
 }
 
@@ -34,31 +30,18 @@ function setup() {
 
     engine = Engine.create();
     world = engine.world;
- 
-    createPlinkos();
-
+    
+    Events.on(engine, 'collisionStart', pairsCollision);
     world.gravity.y= 0.7;
-
+    
     // bottom bounary            //   x , y , w , h 
     boundaries.push(new Boundary(width/2, height +50, width ,100));
-
+    
+    createPlinkos();
     createBuckets();
-
-    Events.on(engine, 'collisionStart', pairsCollision);
-
 }
 
 function pairsCollision(event){
-
-    
-
-    // if( event.pairs[0].id){
-    //     var labelA = event.pairs[0].bodyA.label;
-    //     var labelB = event.pairs[0].bodyB.label
-    //     console.log(labelA, labelB);
-    // }
-
-
     var pairs  = event.pairs;
     for ( var i=0; i<pairs.length; i++){
         var labelA = pairs[i].bodyA.label;
@@ -66,20 +49,12 @@ function pairsCollision(event){
 
         if(labelA == 'particle' && labelB =='plinko'){
             // ding.play();
-            console.log(labelA,labelB);
         }
         if(labelA == 'plinko' && labelB =='particle'){
             // ding.play();
-            console.log(labelA,labelB);
         }
-
-        // console.log(labelA, labelB);
-
     }
-
-    // console.log(event);
 }
-
 
 function createBuckets(){
 
@@ -122,13 +97,11 @@ function draw() {
     background(0, 0, 0);
     Engine.update(engine); 
 
-
     if( frameCount % 60 == 0){
         createNewParticle();
     }
 
-
-
+    // Remove particles once they are off screen
     for( var i =0 ; i< particles.length; i++){
         particles[i].show();
 
