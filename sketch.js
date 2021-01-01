@@ -18,6 +18,7 @@ var plinkoRadius =16
 var spacing = 0;
 
 var boundaries = [];
+var initialParticles = 100;
 
 function preload(){
 
@@ -39,6 +40,10 @@ function setup() {
     
     createPlinkos();
     createBuckets();
+
+    createInitialParticles(initialParticles);
+ 
+    
 }
 
 function pairsCollision(event){
@@ -51,7 +56,7 @@ function pairsCollision(event){
             // ding.play();
         }
         if(labelA == 'plinko' && labelB =='particle'){
-            // ding.play();
+            // ding.play();initialParticles
         }
     }
 }
@@ -93,12 +98,22 @@ function createNewParticle(){
     particles.push(p);
 }
 
+function createInitialParticles(initialParticles){
+  for ( var i = 0; i < initialParticles ; i++){
+    console.log(`created initial Particles${i}`);
+    createNewParticle();
+  }
+}
+
+
 function draw() {
     background(0, 0, 0);
     Engine.update(engine); 
 
-    if( frameCount % 60 == 0){
+
+    if( frameCount % 20 == 0){
         createNewParticle();
+        
     }
 
     // Remove particles once they are off screen
@@ -106,8 +121,8 @@ function draw() {
         particles[i].show();
 
         if(particles[i].isOffScreen()){
-            console.log(`removing a particle.`);
-            console.log(`particles.length:${particles.length}`);
+            // console.log(`removing a particle.`);
+            // console.log(`particles.length:${particles.length}`);
             particles.splice(i,1);
             i--;
         }
