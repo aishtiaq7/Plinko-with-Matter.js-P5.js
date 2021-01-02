@@ -4,7 +4,7 @@ class Particle{
         this.options = {
             friction : 0,
             restitution : 0.5,
-            desity: 1.00
+            density: 1.00
             
         }
         x += random(-3,3); // 50% change to go left or right
@@ -34,6 +34,12 @@ class Particle{
             World.remove(world,this.body);
             return true;
         }
+    }
+
+    remove(){
+
+        World.remove(world, this.body);
+        console.log('removed a ball');
     }
 
 }

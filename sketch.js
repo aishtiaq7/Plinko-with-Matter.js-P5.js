@@ -5,6 +5,7 @@ var Engine = Matter.Engine,
     World = Matter.World,
     Bodies = Matter.Bodies;
     Events = Matter.Events;
+    MouseConstraint = Matter.MouseConstraint;
 
 var engine; 
 var world; 
@@ -19,6 +20,7 @@ var spacing = 0;
 
 var boundaries = [];
 var initialParticles = 100;
+var maxPlinkos = 80;
 
 function preload(){
 
@@ -42,6 +44,12 @@ function setup() {
     createBuckets();
 
     createInitialParticles(initialParticles);
+
+    //MouseConstraint
+    var options = {
+
+    }
+    MouseConstraint.create(engine, options)
  
     
 }
@@ -100,7 +108,7 @@ function createNewParticle(){
 
 function createInitialParticles(initialParticles){
   for ( var i = 0; i < initialParticles ; i++){
-    console.log(`created initial Particles${i}`);
+    // console.log(`created initial Particles${i}`);
     createNewParticle();
   }
 }
@@ -126,6 +134,14 @@ function draw() {
             particles.splice(i,1);
             i--;
         }
+
+        //limit max number of plinkos
+        if ( particles.length > maxPlinkos){
+
+            particles.splice(0,1)
+            particles[0].remove();
+        }
+
     }
 
     plinkos.forEach(plinko =>{
