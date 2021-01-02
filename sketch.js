@@ -3,9 +3,13 @@
 var Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
-    Bodies = Matter.Bodies;
-    Events = Matter.Events;
+    Bodies = Matter.Bodies,
+    Events = Matter.Events,
+    Constraint = Matter.Constraint,
+    Mouse = Matter.Mouse;
     MouseConstraint = Matter.MouseConstraint;
+
+var mConstraint;
 
 var engine; 
 var world; 
@@ -27,9 +31,9 @@ function preload(){
     //There was this problem with p5.js not supporting sound
     // var ding = loadSound('ding.mp3');
 }
-
+// *************************** SETUP **********************
 function setup() {
-    createCanvas(800, 600);
+    var canvas = createCanvas(800, 600);
 
     engine = Engine.create();
     world = engine.world;
@@ -40,16 +44,19 @@ function setup() {
     // bottom bounary            //   x , y , w , h 
     boundaries.push(new Boundary(width/2, height +50, width ,100));
     
-    createPlinkos();
+    createPegs();
     createBuckets();
 
     createInitialParticles(initialParticles);
 
     //MouseConstraint
+    MouseConstraint.create(engine, options);
+    mConstraint = Mouse.create(canvas.elt);
     var options = {
+        mouse: canvasMouse
 
     }
-    MouseConstraint.create(engine, options)
+    World.add(world,mConstraint);
  
     
 }
@@ -83,7 +90,7 @@ function createBuckets(){
 
 }
 
-function createPlinkos(){
+function createPegs(){
     spacing = width/col;
 
     for ( var j = 0 ; j< row; j++){
@@ -113,7 +120,7 @@ function createInitialParticles(initialParticles){
   }
 }
 
-
+// *************************** DRAW **********************
 function draw() {
     background(0, 0, 0);
     Engine.update(engine); 
